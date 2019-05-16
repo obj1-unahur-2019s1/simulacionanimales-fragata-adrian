@@ -10,10 +10,23 @@ program animales {
 	 * agregamos personajes
 	 */ 
 	var animalActual = new Vaca()
+	game.addVisual(animalActual)
 
 	/*
 	 * configuraciones de teclado
 	 */
+	
+	keyboard.c().onPressDo({ animalActual.comer(12) }) 
+	/*	{ animalActual.comer(12) } es un OBJETO BLOQUE
+	*	se ejecuta cuando yo le indico que lo haga
+	*/
+	keyboard.p().onPressDo({ game.say(animalActual, animalActual.peso().toString()) })
+	keyboard.b().onPressDo({ animalActual.beber() })
+	keyboard.s().onPressDo({ 
+		if(animalActual.tieneSed()){ game.say(animalActual, "Tengo sed") }
+		else { game.say(animalActual, "No tengo sed") }
+	})
+	keyboard.x().onPressDo({ game.say(animalActual, "NO JODAS PIBE!!!") })
 	
 	/*
 	 * arrancamos el juego
