@@ -1,5 +1,6 @@
 import wollok.game.*
 import animales.*
+import comedero.*
 
 program animales {
 	// configuracion de pantalla
@@ -11,12 +12,15 @@ program animales {
 	  
 	var gallina = new Gallina()
 	var vaca = new Vaca()
+	var comedero = new Comedero()
 	
- 	var animales = [gallina, vaca] 
+ 	var animales = [vaca, gallina] 
  	var posicion = 0
 	var animalActual = animales.get(posicion)
 	
+	
 	game.addVisual(animalActual)
+	game.addVisual(comedero)
 
 
 	// configuraciones de teclado
@@ -32,8 +36,35 @@ program animales {
 		else { game.say(animalActual, "No tengo sed") }
 	})
 	
-	keyboard.up().onPressDo({animalActual.position().moveUp(2)})
+	keyboard.h().onPressDo({ 
+		animalActual.hambre()
+		if(animalActual.tieneHambre()){ game.say(animalActual, "Tengo hambre") }
+		else { game.say(animalActual, "No tengo hambre") }
+	})
 	
+	//movimieno
+	keyboard.up().onPressDo({ 
+		animalActual.puedeCaminar()
+		animalActual.position(animalActual.position().up(1))
+		animalActual.perderPeso()
+	})
+	keyboard.down().onPressDo({ 
+		animalActual.puedeCaminar()
+		animalActual.position(animalActual.position().down(1))
+		animalActual.perderPeso()
+	})
+	keyboard.right().onPressDo({ 
+		animalActual.puedeCaminar()
+		animalActual.position(animalActual.position().right(1))
+		animalActual.perderPeso()
+	})
+	keyboard.left().onPressDo({ 
+		animalActual.puedeCaminar()
+		animalActual.position(animalActual.position().left(1))
+		animalActual.perderPeso()
+	})
+	
+	//cambiar animal
 	keyboard.x().onPressDo({ 
 		game.removeVisual(animalActual)
 		if(posicion < (animales.size() - 1)){ 
