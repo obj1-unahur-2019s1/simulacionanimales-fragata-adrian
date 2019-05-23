@@ -23,17 +23,17 @@ class Vaca {
 class Gallina {
 	var property position = game.at(5,7)
 	const property image = "gallina.gif"
-	
-	const property peso = 4
+
 	var property vecesQueComio = 0
 	var property tieneSed = false
 	var property tieneHambre = false
 	
 	method comer(kilos) { 
 		vecesQueComio += 1
-		if(vecesQueComio == 2 or vecesQueComio == 5 ){ tieneSed = true }
+		if(vecesQueComio % 2 == 0 or vecesQueComio % 5 == 0){ tieneSed = true }
 		else { tieneSed = false }
 	}
+	method peso() { return 4 }
 	method beber() {  }
 	method hambre() { if(vecesQueComio % 2 == 0){ tieneHambre = true } else { tieneHambre = false } }
 	method perderPeso() {  }
