@@ -78,6 +78,18 @@ program animales {
 		game.addVisual(animalActual)
 	})
 	
+	//Colosiones
+	
+	game.whenCollideDo(comedero, {animal =>
+		animalActual.position(animalActual.position().down(1))
+		if(comedero.puedeAtender(animal)) { 
+			comedero.atender(animal)
+			game.say(animal, "Quede empachado")
+		}else {
+			game.say(comedero, "No te puedo atender Kpo")
+		}
+	})
+	
 	
 	
 	
